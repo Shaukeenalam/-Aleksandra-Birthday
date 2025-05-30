@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wszystkiego Najlepszego Ola!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&family=Pacifico&display=swap');
+        
+        :root {
+            --primary: #ff758c;
+            --secondary: #ff7eb3;
+            --accent: #ffd700;
+            --text: #5a3d5c;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('images/bgimage.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text);
+        }
+        
+        .card {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            margin: 30px 0;
+            transform-style: preserve-3d;
+            transition: transform 0.5s, box-shadow 0.5s;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        
+        .header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+            transform: rotate(-2deg);
+            animation: bounce 2s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            0% { transform: rotate(-2deg) translateY(0); }
+            100% { transform: rotate(-2deg) translateY(-10px); }
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            margin: 15px 0 0;
+            position: relative;
+            z-index: 2;
+            font-weight: bold;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            opacity: 0.7;
+            animation: fall 5s linear infinite;
+            z-index: 1;
+            border-radius: 50%;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .content {
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .cake-container {
+            margin: 30px auto;
+            width: 300px;
+            height: 250px;
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .cake {
+            width: 200px;
+            height: 100px;
+            background: #f8b195;
+            border-radius: 10px 10px 0 0;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        
+        .cake:hover {
+            transform: translateX(-50%) rotateX(10deg);
+        }
+        
+        .cake:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: #f67280;
+            top: 0px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .cake:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            background: #fff;
+            top: 0px;
+            border-radius: 10px 10px 0 0;
+            opacity: 0.8;
+        }
+        
+        .candles {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .candle {
+            width: 12px;
+            height: 50px;
+            background: var(--accent);
+            position: relative;
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transform: translateY(0);
+            transition: transform 0.3s;
+        }
+        
+        .candle:hover {
+            transform: translateY(-5px);
+        }
+        
+        .flame {
+            width: 16px;
+            height: 30px;
+            background: #ff9a00;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -25px;
+            left: -2px;
+            box-shadow: 0 0 15px #ff9a00, 0 0 30px #ff9a00;
+            animation: flicker 0.8s infinite alternate;
+            transform-origin: center bottom;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+            25% { transform: scale(1.1) rotate(0deg); }
+            50% { transform: scale(0.9) rotate(2deg); opacity: 0.9; }
+            75% { transform: scale(1.05) rotate(-1deg); }
+        }
+        
+        .flame.out {
+            animation: blowOut 0.5s forwards;
+        }
+        
+        @keyframes blowOut {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0) translateY(20px); opacity: 0; }
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 30px 0;
+            color: var(--text);
+            position: relative;
+        }
+        
+        .message:before, .message:after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .message:before {
+            top: -20px;
+            left: -10px;
+        }
+        
+        .message:after {
+            bottom: -40px;
+            right: -10px;
+        }
+        
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            margin-top: 40px;
+            color: var(--primary);
+            transform: rotate(-5deg);
+            display: inline-block;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+            position: relative;
+            overflow: hidden;
+            font-weight: bold;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 117, 140, 0.6);
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(2px);
+        }
+        
+        .hidden-message {
+            display: none;
+            background: #fff9f9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid var(--primary);
+            animation: fadeIn 1s;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        
+        .photo-slider {
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .photo-slide {
+            display: none;
+            width: 100%;
+            transition: opacity 1s;
+        }
+        
+        .photo-slide.active {
+            display: block;
+            animation: fadeIn 1s;
+        }
+        
+        .photo-slide img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+        }
+        
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--primary);
+            animation: float-up 4s linear forwards;
+            opacity: 0.7;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #888;
+            position: relative;
+        }
+        
+        .footer:before {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            margin: 0 auto 15px;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .cake-container {
+                width: 250px;
+                height: 200px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+                margin: 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="heartsContainer"></div>
+    
+    <div class="card animate__animated animate__zoomIn">
+        <div class="header">
+            <h1>Wszystkiego Najlepszego Ola!</h1>
+            <p>Sto lat! Sto lat! Niech żyje, żyje nam!</p>
+            <div id="confetti-container"></div>
+        </div>
+        
+        <div class="content">
+            <div class="btn-container" style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <button class="btn" id="blowBtn">Zdmuchnij świeczki</button>
+                <button class="btn" id="surpriseBtn">Otwórz niespodziankę</button>
+                <button class="btn" id="musicBtn">🎵 Graj muzykę</button>
+            </div>
+            
+            <div class="cake-container">
+                <div class="cake"></div>
+                <div class="candles">
+                    <div class="candle">
+                        <div class="flame" id="flame1"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame" id="flame2"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame" id="flame3"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame" id="flame4"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="photo-slider" id="photoSlider">
+                <div class="photo-slide active">
+                    <img src="images/image1.jpg" alt="Birthday Wishes">
+                </div>
+                <div class="photo-slide">
+                    <img src="images/image2.jpg" alt="Best Wishes">
+                </div>
+                <div class="photo-slide">
+                    <img src="images/image3.jpg" alt="Sto Lat">
+                </div>
+                <div class="photo-slide">
+                    <img src="images/image4.jpg" alt="Celebration">
+                </div>
+            </div>
+            
+            <div class="slider-nav" id="sliderNav"></div>
+            
+            <p class="message">
+                Ola, życzymy Ci dnia tak jasnego jak Twój uśmiech,<br>
+                tak ciepłego jak Twoje serce i tak wspaniałego jak Ty sama!<br><br>
+                
+                Niech ten rok przyniesie Ci mnóstwo radości, śmiechu<br>
+                i spełnienia marzeń. Sto lat! 🎂💖
+            </p>
+            
+            <div class="hidden-message" id="hiddenMessage">
+                <h3>SPECIAL MESSAGE FOR OLA:</h3>
+                <p>
+                    Jesteś niesamowitą osobą — dobrą, silną i pełną światła.<br>
+                    Świat jest lepszy z Tobą w nim!<br><br>
+                    
+                    Niech wszystkie Twoje marzenia się spełnią w tym roku! 💫<br>
+                    Kochamy Cię! ❤️
+                </p>
+            </div>
+            
+            <div class="signature">— Shaukeen Alam</div>
+            
+            <div class="footer">
+                Made with ❤️ for Ola's special day | © 2025
+            </div>
+        </div>
+    </div>
+
+    <audio id="birthdayAudio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Create confetti
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#ff9a9e', '#fad0c4', '#a18cd1', '#fbc2eb', '#ffecd2', '#fcb69f'];
+            const symbols = ['🎉', '🎊', '🎈', '🎁', '🎂', '💖'];
+            
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -20 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                if (Math.random() > 0.5) {
+                    confetti.style.width = Math.random() * 12 + 8 + 'px';
+                    confetti.style.height = confetti.style.width;
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                } else {
+                    confetti.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    confetti.style.fontSize = Math.random() * 10 + 15 + 'px';
+                    confetti.style.backgroundColor = 'transparent';
+                }
+                
+                confetti.style.animationDuration = Math.random() * 4 + 3 + 's';
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(confetti);
+            }
+        }
+        
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const colors = ['#ff758c', '#ff7eb3', '#ff9a9e', '#f67280', '#f8b195'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }, 300);
+        }
+        
+        // Blow out candles
+        function blowCandles() {
+            const flames = ['flame1', 'flame2', 'flame3', 'flame4'];
+            const blowBtn = document.getElementById('blowBtn');
+            
+            blowBtn.disabled = true;
+            blowBtn.textContent = 'Świeczki zdmuchnięte!';
+            
+            flames.forEach((flameId, index) => {
+                setTimeout(() => {
+                    const flame = document.getElementById(flameId);
+                    flame.classList.add('out');
+                    
+                    if (index === flames.length - 1) {
+                        setTimeout(() => {
+                            createHearts();
+                            document.getElementById('confetti-container').innerHTML = '';
+                            createConfetti();
+                            
+                            const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
+                            audio.play().catch(e => console.log(e));
+                            
+                            setTimeout(() => {
+                                alert('Wszystkiego najlepszego Ola! 🎉 Twoje życzenia się spełnią!');
+                            }, 1000);
+                        }, 500);
+                    }
+                }, index * 300);
+            });
+        }
+        
+        // Show surprise message
+        function showSurprise() {
+            const message = document.getElementById('hiddenMessage');
+            message.style.display = 'block';
+            
+            message.classList.add('animate__animated', 'animate__tada');
+            setTimeout(() => {
+                message.classList.remove('animate__animated', 'animate__tada');
+            }, 1000);
+        }
+        
+        // Toggle music
+        function toggleMusic() {
+            const audio = document.getElementById('birthdayAudio');
+            const musicBtn = document.getElementById('musicBtn');
+            
+            try {
+                if (audio.paused) {
+                    audio.play()
+                        .then(() => {
+                            musicBtn.innerHTML = '🔇 Wyłącz muzykę';
+                        })
+                        .catch(e => {
+                            console.error("Audio play failed:", e);
+                            musicBtn.innerHTML = 'Kliknij by odtworzyć';
+                        });
+                } else {
+                    audio.pause();
+                    musicBtn.innerHTML = '🎵 Graj muzykę';
+                }
+            } catch (e) {
+                console.error("Audio error:", e);
+                musicBtn.innerHTML = 'Błąd dźwięku';
+            }
+        }
+        
+        // Photo slider
+        function initSlider() {
+            const slides = document.querySelectorAll('.photo-slide');
+            const nav = document.getElementById('sliderNav');
+            let currentSlide = 0;
+            
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'slider-dot';
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+                nav.appendChild(dot);
+            });
+            
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                goToSlide(currentSlide);
+            }, 3000);
+            
+            function goToSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[index].classList.add('active');
+                
+                const dots = document.querySelectorAll('.slider-dot');
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[index].classList.add('active');
+                
+                currentSlide = index;
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('birthdayAudio');
+            audio.volume = 0.5;
+            
+            document.getElementById('musicBtn').addEventListener('click', function() {
+                toggleMusic();
+            }, { once: true });
+            
+            createConfetti();
+            initSlider();
+            createHearts();
+            
+            document.getElementById('blowBtn').addEventListener('click', blowCandles);
+            document.getElementById('surpriseBtn').addEventListener('click', showSurprise);
+            
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'BUTTON') {
+                    createHeartAtPosition(e.clientX, e.clientY);
+                }
+            });
+        });
+        
+        function createHeartAtPosition(x, y) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            heart.style.position = 'fixed';
+            heart.style.animationDuration = '2s';
+            heart.style.color = '#ff758c';
+            heart.style.fontSize = '25px';
+            heart.style.transform = 'translate(-50%, -50%)';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
